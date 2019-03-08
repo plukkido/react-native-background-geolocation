@@ -3,8 +3,18 @@ const config = require('./config');
 const isInstalled = require('./isInstalled');
 
 if (isInstalled.forAndroid()) {
-  const revokePatch = require('react-native/local-cli/link/android/patches/revokePatch');
-  const makeSettingsPatch = require('react-native/local-cli/link/android/patches/makeSettingsPatch');
+  //const revokePatch = require('react-native/local-cli/link/android/patches/revokePatch');
+  //const makeSettingsPatch = require('react-native/local-cli/link/android/patches/makeSettingsPatch');
+  let revokePatch;
+  let makeSettingsPatch;
+  try {
+    applyPatch = require('react-native/local-cli/link/android/patches/revokePatch');
+    makeSettingsPatch = require('react-native/local-cli/link/android/patches/makeSettingsPatch');
+  } catch(e) {
+    applyPatch = require('@react-native-community/cli/build/link/android/patches/revokePatch');
+    makeSettingsPatch = require('@react-native-community/cli/build/link/android/patches/makeSettingsPatch');
+  }
+
   revokePatch(
     config.settingsGradlePath,
     makeSettingsPatch(

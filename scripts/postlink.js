@@ -11,8 +11,18 @@ if (!isInstalled.forAndroid()) {
   // TODO: it would be nicer if react-native link has support for multi projects itself
   // Please vote:
   // https://react-native.canny.io/feature-requests/p/enable-subprojects-in-native-android-components-to-enable-code-reuse-with-cordov
-  const applyPatch = require('react-native/local-cli/link/android/patches/applyPatch');
-  const makeSettingsPatch = require('react-native/local-cli/link/android/patches/makeSettingsPatch');
+  //const applyPatch = require('react-native/local-cli/link/android/patches/applyPatch');
+  //const makeSettingsPatch = require('react-native/local-cli/link/android/patches/makeSettingsPatch');
+  let applyPatch;
+  let makeSettingsPatch;
+  try {
+    applyPatch = require('react-native/local-cli/link/android/patches/applyPatch');
+    makeSettingsPatch = require('react-native/local-cli/link/android/patches/makeSettingsPatch');
+  } catch(e) {
+    applyPatch = require('@react-native-community/cli/build/link/android/patches/applyPatch');
+    makeSettingsPatch = require('@react-native-community/cli/build/link/android/patches/makeSettingsPatch');
+  }
+
   applyPatch(
     config.settingsGradlePath,
     makeSettingsPatch(
