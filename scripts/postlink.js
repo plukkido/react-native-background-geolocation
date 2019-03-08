@@ -19,8 +19,8 @@ if (!isInstalled.forAndroid()) {
     applyPatch = require('react-native/local-cli/link/android/patches/applyPatch');
     makeSettingsPatch = require('react-native/local-cli/link/android/patches/makeSettingsPatch');
   } catch(e) {
-    applyPatch = require('@react-native-community/cli/build/link/android/patches/applyPatch');
-    makeSettingsPatch = require('@react-native-community/cli/build/link/android/patches/makeSettingsPatch');
+    applyPatch = require('@react-native-community/cli/build/link/android/patches/applyPatch').default;
+    makeSettingsPatch = require('@react-native-community/cli/build/link/android/patches/makeSettingsPatch').default;
   }
 
   applyPatch(
